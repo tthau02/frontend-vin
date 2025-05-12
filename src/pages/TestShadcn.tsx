@@ -53,7 +53,7 @@ const TestShadcn = () => {
               />
             </div>
 
-            <Button type='submit' variant='default' size='lg' className='w-full'>
+            <Button type='submit' variant='secondary' size='lg' className='w-full bg-amber-400'>
               Login
             </Button>
           </form>
@@ -65,6 +65,7 @@ const TestShadcn = () => {
         <Button variant='outline'>Outline Button</Button>
         <Button variant='secondary'>Secondary Button</Button>
         <Button variant='link'>Link Button</Button>
+        <Button variant="outline" >test</Button>
       </div>
     </div>
   );
