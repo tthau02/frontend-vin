@@ -1,8 +1,5 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import { CalendarIcon, Globe, Menu, Search, User } from "lucide-react";
 import { Button } from "../../ui/button";
-import { Input } from "../../ui/input";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,17 +7,16 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../../ui/dropdown-menu";
-import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
-import { cn } from "@/lib/utils";
-import { useMobile } from "../../../hooks/useMobile";
+import { useMobile } from "@/hooks/useMobile";
+import ClientSearch from "./ClientSearch";
+import { Globe, Menu, User } from "lucide-react";
 
 export default function ClientHeader() {
   const isMobile = useMobile();
-  const [activeFilter, setActiveFilter] = useState<string | null>(null);
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white">
-      <div className="w-[1500px] mx-auto flex h-16 items-center justify-between px-4 md:px-6">
+    <header className="sticky top-0 z-50 w-full bg-gray-100">
+      <div className="w-[1500px] m-auto flex h-26 items-center justify-between px-3 md:px-6">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
           <div className="text-rose-500">
@@ -39,247 +35,15 @@ export default function ClientHeader() {
           </span>
         </Link>
 
-        {/* Search Bar - Desktop */}
-        <div className="hidden md:block">
-          <div className="relative flex items-center rounded-full border shadow-sm">
-            <Button
-              variant="ghost"
-              className={cn(
-                "rounded-full px-4 py-2 text-sm font-medium",
-                activeFilter === "location" && "bg-gray-100"
-              )}
-              onClick={() => {
-                if (activeFilter === "location") {
-                  setActiveFilter(null);
-                } else {
-                  setActiveFilter("location");
-                }
-              }}
-            >
-              Anywhere
-            </Button>
-            <div className="h-4 w-px bg-gray-300" />
-            <Button
-              variant="ghost"
-              className={cn(
-                "rounded-full px-4 py-2 text-sm font-medium",
-                activeFilter === "date" && "bg-gray-100"
-              )}
-              onClick={() =>
-                setActiveFilter(activeFilter === "date" ? null : "date")
-              }
-            >
-              Any week
-            </Button>
-            <div className="h-4 w-px bg-gray-300" />
-            <Button
-              variant="ghost"
-              className={cn(
-                "rounded-full px-4 py-2 text-sm font-medium text-gray-500",
-                activeFilter === "guests" && "bg-gray-100"
-              )}
-              onClick={() =>
-                setActiveFilter(activeFilter === "guests" ? null : "guests")
-              }
-            >
-              Add guests
-            </Button>
-            <Button
-              size="icon"
-              className="ml-2 rounded-full bg-rose-500 hover:bg-rose-600"
-            >
-              <Search className="h-4 w-4 text-white" />
-              <span className="sr-only">Search</span>
-            </Button>
-          </div>
-
-          {/* Filter Popovers */}
-          {activeFilter === "location" && (
-            <div className="absolute left-1/2 mt-2 w-80 -translate-x-1/2 rounded-lg border bg-white p-4 shadow-lg">
-              <div className="space-y-2">
-                <h3 className="font-medium">Popular destinations</h3>
-                <div className="grid grid-cols-2 gap-2">
-                  <Button variant="ghost" className="justify-start">
-                    New York
-                  </Button>
-                  <Button variant="ghost" className="justify-start">
-                    London
-                  </Button>
-                  <Button variant="ghost" className="justify-start">
-                    Paris
-                  </Button>
-                  <Button variant="ghost" className="justify-start">
-                    Tokyo
-                  </Button>
-                  <Button variant="ghost" className="justify-start">
-                    Barcelona
-                  </Button>
-                  <Button variant="ghost" className="justify-start">
-                    Rome
-                  </Button>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {activeFilter === "date" && (
-            <div className="absolute left-1/2 mt-2 w-auto -translate-x-1/2 rounded-lg border bg-white p-4 shadow-lg">
-              <div className="flex items-center gap-2">
-                <CalendarIcon className="h-5 w-5 text-gray-500" />
-                <span>Select dates</span>
-              </div>
-              <div className="mt-2 grid grid-cols-2 gap-4">
-                <div>
-                  <div className="mb-1 text-sm font-medium">Check in</div>
-                  <Button variant="outline" className="w-full justify-start">
-                    Add date
-                  </Button>
-                </div>
-                <div>
-                  <div className="mb-1 text-sm font-medium">Check out</div>
-                  <Button variant="outline" className="w-full justify-start">
-                    Add date
-                  </Button>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {activeFilter === "guests" && (
-            <div className="absolute left-1/2 mt-2 w-80 -translate-x-1/2 rounded-lg border bg-white p-4 shadow-lg">
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className="font-medium">Adults</div>
-                    <div className="text-sm text-gray-500">
-                      Ages 13 or above
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      className="h-8 w-8 rounded-full"
-                    >
-                      -
-                    </Button>
-                    <span>0</span>
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      className="h-8 w-8 rounded-full"
-                    >
-                      +
-                    </Button>
-                  </div>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className="font-medium">Children</div>
-                    <div className="text-sm text-gray-500">Ages 2-12</div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      className="h-8 w-8 rounded-full"
-                    >
-                      -
-                    </Button>
-                    <span>0</span>
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      className="h-8 w-8 rounded-full"
-                    >
-                      +
-                    </Button>
-                  </div>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className="font-medium">Infants</div>
-                    <div className="text-sm text-gray-500">Under 2</div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      className="h-8 w-8 rounded-full"
-                    >
-                      -
-                    </Button>
-                    <span>0</span>
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      className="h-8 w-8 rounded-full"
-                    >
-                      +
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Search Bar - Mobile */}
-        <div className="flex md:hidden">
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button
-                variant="outline"
-                className="flex items-center gap-2 rounded-full border shadow-sm"
-              >
-                <Search className="h-4 w-4" />
-                <div className="flex flex-col items-start">
-                  <span className="text-sm font-medium">Anywhere</span>
-                  <span className="text-xs text-gray-500">
-                    Any week · Add guests
-                  </span>
-                </div>
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-80">
-              <div className="space-y-4">
-                <div className="space-y-2">
-                  <h3 className="font-medium">Where to?</h3>
-                  <Input placeholder="Search destinations" />
-                </div>
-                <div className="space-y-2">
-                  <h3 className="font-medium">When?</h3>
-                  <div className="grid grid-cols-2 gap-2">
-                    <Button variant="outline" className="justify-start">
-                      Check in
-                    </Button>
-                    <Button variant="outline" className="justify-start">
-                      Check out
-                    </Button>
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <h3 className="font-medium">Who?</h3>
-                  <Button variant="outline" className="w-full justify-start">
-                    Add guests
-                  </Button>
-                </div>
-                <Button className="w-full bg-rose-500 hover:bg-rose-600">
-                  Search
-                </Button>
-              </div>
-            </PopoverContent>
-          </Popover>
-        </div>
-
+        <ClientSearch />
         {/* User Menu */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2">
           {!isMobile && (
             <Button
               variant="ghost"
               className="hidden rounded-full text-sm font-medium md:flex"
             >
-              Airbnb your home
+              Trở thành host
             </Button>
           )}
 
