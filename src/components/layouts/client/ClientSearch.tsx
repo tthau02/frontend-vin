@@ -450,7 +450,7 @@ export default function ClientSearch() {
             </div>
           </PopoverTrigger>
           <PopoverContent
-            className="w-100 border-none mt-3 rounded-2xl shadow-2x"
+            className="w-100 border-none mt-3 rounded-2xl shadow-2x p-3"
             align="end"
           >
             <div className="space-y-4 p-1">
