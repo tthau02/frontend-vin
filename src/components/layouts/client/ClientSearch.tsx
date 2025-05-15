@@ -300,7 +300,7 @@ export default function ClientSearch() {
                   month={month}
                   onMonthChange={setMonth}
                   weekStartsOn={1}
-                  disabled={(date) => date < new Date()}
+                  disabled={(date: any) => date < new Date()}
                   locale={vi}
                   className="p-0"
                   showOutsideDays={false}
