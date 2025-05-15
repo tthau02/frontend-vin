@@ -60,13 +60,13 @@ export default function ClientHeader() {
             <DropdownMenuTrigger asChild>
               <Button
                 variant="outline"
-                className="flex gap-2 rounded-full border px-3 py-1.5"
+                className="flex gap-2 rounded-full border-gray-200 px-4 py-2"
               >
                 <Menu className="h-5 w-5" />
                 <User className="h-5 w-5" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-56">
+            <DropdownMenuContent align="end" className="w-56 p-3 mt-1 border-none shadow-2xl rounded-2xl">
               <DropdownMenuItem className="font-medium">
                 <Link to="/login" className="w-full">
                   Sign up

@@ -11,7 +11,6 @@ import {
   MinusCircle,
   PlusCircle,
   Search,
-  CalendarIcon,
 } from "lucide-react";
 import { format, addDays } from "date-fns";
 import { vi } from "date-fns/locale";
@@ -220,7 +219,7 @@ export default function ClientSearch() {
             </div>
           </PopoverTrigger>
           <PopoverContent
-            className="w-[650px] ml-[110px] p-1 mt-5 border-none shadow-2xl rounded-2xl"
+            className="w-[550px] ml-[110px] p-1 mt-5 pt-5 border-none shadow-2xl rounded-2xl"
             align="center"
           >
             <div className="flex">
@@ -266,7 +265,7 @@ export default function ClientSearch() {
                   <div className="text-lg font-medium">
                     {format(month, "MMMM yyyy", { locale: vi })}
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center">
                     <Button
                       variant="ghost"
                       size="icon"
@@ -337,7 +336,7 @@ export default function ClientSearch() {
         >
           <PopoverTrigger asChild>
             <div
-              className="flex h-full flex-1 cursor-pointer items-center px-6 py-2 rounded-full hover:bg-gray-200 transition-all"
+              className="flex h-full flex-1 cursor-pointer gap-6 items-center px-6 py-2 rounded-full hover:bg-gray-200 transition-all"
               onClick={() => setActiveSection("guests")}
             >
               <div className="flex flex-col w-[100px]">
@@ -361,7 +360,7 @@ export default function ClientSearch() {
             </div>
           </PopoverTrigger>
           <PopoverContent
-            className="w-100 border-none mt-3 rounded-2xl shadow-2x"
+            className="w-100 border-none mt-3 shadow-2xl rounded-2xl"
             align="end"
           >
             <div className="space-y-4 p-1">
