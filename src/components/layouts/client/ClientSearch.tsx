@@ -11,9 +11,11 @@ import {
   MinusCircle,
   PlusCircle,
   Search,
+  CalendarIcon,
 } from "lucide-react";
 import { format, addDays } from "date-fns";
 import { vi } from "date-fns/locale";
+import { Calendar } from "@/components/ui/calendar";
 
 export default function ClientSearch() {
   const [activeSection, setActiveSection] = useState<
@@ -97,8 +99,7 @@ export default function ClientSearch() {
 
   // Get weekend dates (Friday to Sunday)
   const dayOfWeek = today.getDay();
-  const daysToFriday =
-    dayOfWeek === 5 ? 0 : dayOfWeek === 6 ? 6 : 5 - dayOfWeek;
+  const daysToFriday = dayOfWeek === 5 ? 0 : dayOfWeek === 6 ? 6 : 5 - dayOfWeek;
   const friday = addDays(today, daysToFriday);
   const sunday = addDays(friday, 2);
   const weekendFormatted = `${format(friday, "d", { locale: vi })}–${format(
@@ -219,7 +220,7 @@ export default function ClientSearch() {
             </div>
           </PopoverTrigger>
           <PopoverContent
-            className="w-[650px] ml-[110px] p-1 mt-3 border-none shadow-2xl rounded-2xl"
+            className="w-[650px] ml-[110px] p-1 mt-5 border-none shadow-2xl rounded-2xl"
             align="center"
           >
             <div className="flex">
@@ -248,7 +249,7 @@ export default function ClientSearch() {
                 </div>
 
                 <div
-                  className="cursor-pointer rounded-xl  p-4 border border-gray-300 hover:border-gray-500 transition-all"
+                  className="cursor-pointer rounded-xl p-4 border border-gray-300 hover:border-gray-500 transition-all"
                   onClick={() => {
                     setDate(friday);
                     setActiveSection(null);
@@ -260,9 +261,11 @@ export default function ClientSearch() {
               </div>
 
               {/* Calendar */}
-              <div className="flex-1 p-4">
+              <div className="flex-1 p-2">
                 <div className="flex items-center justify-between mb-4">
-                  <div className="text-lg font-medium">Tháng 5 năm 2025</div>
+                  <div className="text-lg font-medium">
+                    {format(month, "MMMM yyyy", { locale: vi })}
+                  </div>
                   <div className="flex items-center gap-2">
                     <Button
                       variant="ghost"
@@ -291,126 +294,34 @@ export default function ClientSearch() {
                   </div>
                 </div>
 
-                <div className="custom-calendar">
-                  <div className="grid grid-cols-7 gap-1 text-center mb-2">
-                    <div className="text-sm font-medium">T2</div>
-                    <div className="text-sm font-medium">T3</div>
-                    <div className="text-sm font-medium">T4</div>
-                    <div className="text-sm font-medium">T5</div>
-                    <div className="text-sm font-medium">T6</div>
-                    <div className="text-sm font-medium">T7</div>
-                    <div className="text-sm font-medium">CN</div>
-                  </div>
-
-                  <div className="grid grid-cols-7 gap-1 text-center">
-                    {/* First week with empty cells */}
-                    <div className="h-10 w-10"></div>
-                    <div className="h-10 w-10"></div>
-                    <div className="h-10 w-10"></div>
-                    <div className="h-10 w-10 flex items-center justify-center rounded-full hover:bg-gray-100 cursor-pointer">
-                      1
-                    </div>
-                    <div className="h-10 w-10 flex items-center justify-center rounded-full hover:bg-gray-100 cursor-pointer">
-                      2
-                    </div>
-                    <div className="h-10 w-10 flex items-center justify-center rounded-full hover:bg-gray-100 cursor-pointer">
-                      3
-                    </div>
-                    <div className="h-10 w-10 flex items-center justify-center rounded-full hover:bg-gray-100 cursor-pointer">
-                      4
-                    </div>
-
-                    {/* Second week */}
-                    <div className="h-10 w-10 flex items-center justify-center rounded-full hover:bg-gray-100 cursor-pointer">
-                      5
-                    </div>
-                    <div className="h-10 w-10 flex items-center justify-center rounded-full hover:bg-gray-100 cursor-pointer">
-                      6
-                    </div>
-                    <div className="h-10 w-10 flex items-center justify-center rounded-full hover:bg-gray-100 cursor-pointer">
-                      7
-                    </div>
-                    <div className="h-10 w-10 flex items-center justify-center rounded-full hover:bg-gray-100 cursor-pointer">
-                      8
-                    </div>
-                    <div className="h-10 w-10 flex items-center justify-center rounded-full hover:bg-gray-100 cursor-pointer">
-                      9
-                    </div>
-                    <div className="h-10 w-10 flex items-center justify-center rounded-full hover:bg-gray-100 cursor-pointer">
-                      10
-                    </div>
-                    <div className="h-10 w-10 flex items-center justify-center rounded-full hover:bg-gray-100 cursor-pointer">
-                      11
-                    </div>
-
-                    {/* Third week */}
-                    <div className="h-10 w-10 flex items-center justify-center rounded-full hover:bg-gray-100 cursor-pointer">
-                      12
-                    </div>
-                    <div className="h-10 w-10 flex items-center justify-center rounded-full hover:bg-gray-100 cursor-pointer">
-                      13
-                    </div>
-                    <div className="h-10 w-10 flex items-center justify-center rounded-full hover:bg-gray-100 cursor-pointer font-medium">
-                      14
-                    </div>
-                    <div className="h-10 w-10 flex items-center justify-center rounded-full hover:bg-gray-100 cursor-pointer font-medium">
-                      15
-                    </div>
-                    <div className="h-10 w-10 flex items-center justify-center rounded-full hover:bg-gray-100 cursor-pointer">
-                      16
-                    </div>
-                    <div className="h-10 w-10 flex items-center justify-center rounded-full hover:bg-gray-100 cursor-pointer">
-                      17
-                    </div>
-                    <div className="h-10 w-10 flex items-center justify-center rounded-full hover:bg-gray-100 cursor-pointer">
-                      18
-                    </div>
-
-                    {/* Fourth week */}
-                    <div className="h-10 w-10 flex items-center justify-center rounded-full hover:bg-gray-100 cursor-pointer">
-                      19
-                    </div>
-                    <div className="h-10 w-10 flex items-center justify-center rounded-full hover:bg-gray-100 cursor-pointer">
-                      20
-                    </div>
-                    <div className="h-10 w-10 flex items-center justify-center rounded-full hover:bg-gray-100 cursor-pointer">
-                      21
-                    </div>
-                    <div className="h-10 w-10 flex items-center justify-center rounded-full hover:bg-gray-100 cursor-pointer">
-                      22
-                    </div>
-                    <div className="h-10 w-10 flex items-center justify-center rounded-full hover:bg-gray-100 cursor-pointer">
-                      23
-                    </div>
-                    <div className="h-10 w-10 flex items-center justify-center rounded-full hover:bg-gray-100 cursor-pointer">
-                      24
-                    </div>
-                    <div className="h-10 w-10 flex items-center justify-center rounded-full hover:bg-gray-100 cursor-pointer">
-                      25
-                    </div>
-
-                    {/* Fifth week */}
-                    <div className="h-10 w-10 flex items-center justify-center rounded-full hover:bg-gray-100 cursor-pointer">
-                      26
-                    </div>
-                    <div className="h-10 w-10 flex items-center justify-center rounded-full hover:bg-gray-100 cursor-pointer">
-                      27
-                    </div>
-                    <div className="h-10 w-10 flex items-center justify-center rounded-full hover:bg-gray-100 cursor-pointer">
-                      28
-                    </div>
-                    <div className="h-10 w-10 flex items-center justify-center rounded-full hover:bg-gray-100 cursor-pointer">
-                      29
-                    </div>
-                    <div className="h-10 w-10 flex items-center justify-center rounded-full hover:bg-gray-100 cursor-pointer">
-                      30
-                    </div>
-                    <div className="h-10 w-10 flex items-center justify-center rounded-full hover:bg-gray-100 cursor-pointer">
-                      31
-                    </div>
-                    <div className="h-10 w-10"></div>
-                  </div>
-                </div>
+                <Calendar
+                  mode="single"
+                  selected={date}
+                  onSelect={setDate}
+                  month={month}
+                  onMonthChange={setMonth}
+                  weekStartsOn={1}
+                  disabled={(date) => date < new Date()}
+                  locale={vi}
+                  className="p-0"
+                  showOutsideDays={false}
+                  fixedWeeks
+                  classNames={{
+                    month: "flex flex-col",
+                    caption: "hidden",
+                    table: "w-full border-collapse",
+                    head_row: "flex w-full",
+                    head_cell: "text-muted-foreground w-9 font-normal text-[0.8rem] py-1",
+                    row: "flex w-full mt-1",
+                    cell: "h-9 w-9 text-center text-sm relative p-0 focus-within:relative focus-within:z-20",
+                    day: "h-9 w-9 p-0 font-normal aria-selected:opacity-100",
+                    day_selected: "bg-primary text-primary-foreground hover:bg-primary",
+                    day_today: "bg-accent text-accent-foreground",
+                    day_outside: "text-muted-foreground opacity-50",
+                    day_disabled: "text-muted-foreground opacity-30",
+                    day_hidden: "invisible",
+                  }}
+                />
               </div>
             </div>
           </PopoverContent>
@@ -450,7 +361,7 @@ export default function ClientSearch() {
             </div>
           </PopoverTrigger>
           <PopoverContent
-            className="w-100 border-none mt-3 rounded-2xl shadow-2x"
+            className="w-100 border-none mt-3 rounded-2xl shadow-2xl p-3"
             align="end"
           >
             <div className="space-y-4 p-1">
