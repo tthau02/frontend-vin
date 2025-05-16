@@ -3,17 +3,13 @@ name: CI Pipeline
 on:
   push:
     branches:
-      - develop
-      - release
-      - main
+      - "**" # chạy trên mọi nhánh
   pull_request:
     branches:
-      - develop
-      - release
-      - main
+      - "**"
 
 jobs:
-  build-and-lint:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -31,7 +27,7 @@ jobs:
 
       - name: 🔍 Linting with ESLint
         run: npx eslint ./src --ext .js,.ts,.tsx
-        continue-on-error: true 
+        continue-on-error: true
 
       - name: 🏗️ Build Application
         run: npm run build
