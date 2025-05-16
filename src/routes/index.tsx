@@ -8,7 +8,10 @@ const routes: RouteObject[] = [
   {
     path: "/",
     element: <ClientLayout />,
-    children: [{ index: true, element: <Home /> }, { path: "login", element: <Login /> }],
+    children: [
+      { index: true, element: <Home /> },
+      { path: "login", element: <Login /> },
+    ],
   },
 ];
 
