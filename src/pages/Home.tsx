@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+import { NavLink } from "react-router-dom";
 
 export default function Home() {
   const scrollContainerRef1 = React.useRef<HTMLDivElement>(null);
@@ -29,22 +30,20 @@ export default function Home() {
       {/* First Section */}
       <div className="mb-12">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold">
+          <NavLink to={""} className="text-xl font-bold">
             Còn phòng tại Huyện Văn Giang vào cuối tuần này ›
-          </h2>
+          </NavLink>
           <div className="flex gap-2">
             <Button
-              variant="outline"
               size="icon"
-              className="rounded-full"
+              className="rounded-full bg-gray-100"
               onClick={() => scroll(scrollContainerRef1, "left")}
             >
               <ChevronLeft className="h-4 w-4" />
             </Button>
             <Button
-              variant="outline"
               size="icon"
-              className="rounded-full"
+              className="rounded-full bg-gray-100"
               onClick={() => scroll(scrollContainerRef1, "right")}
             >
               <ChevronRight className="h-4 w-4" />
@@ -69,17 +68,15 @@ export default function Home() {
           <h2 className="text-xl font-bold">Nơi lưu trú tại Quận 1 ›</h2>
           <div className="flex gap-2">
             <Button
-              variant="outline"
               size="icon"
-              className="rounded-full"
+              className="rounded-full bg-gray-100"
               onClick={() => scroll(scrollContainerRef2, "left")}
             >
               <ChevronLeft className="h-4 w-4" />
             </Button>
             <Button
-              variant="outline"
               size="icon"
-              className="rounded-full"
+              className="rounded-full bg-gray-100"
               onClick={() => scroll(scrollContainerRef2, "right")}
             >
               <ChevronRight className="h-4 w-4" />
@@ -120,13 +117,13 @@ function PropertyCard({ property }: { property: Property }) {
         <img
           src={property.image}
           alt={property.name}
-          className="h-[200px] w-full object-cover rounded-lg"
+          className="h-[250px] w-full object-cover rounded-2xl cursor-pointer"
         />
         <Button
           variant="ghost"
           size="icon"
           className={cn(
-            "absolute top-2 right-2 h-8 w-8 rounded-full bg-white/80 backdrop-blur-sm",
+            "absolute top-2 right-2 h-8 w-8 rounded-full text-white",
             isFavorite && "text-rose-500"
           )}
           onClick={() => setIsFavorite(!isFavorite)}
@@ -138,13 +135,19 @@ function PropertyCard({ property }: { property: Property }) {
         </Badge>
       </div>
       <CardContent className="p-2">
-        <h3 className="font-medium text-sm">{property.name}</h3>
-        <div className="text-sm text-muted-foreground">
-          {property.price} cho {property.nights} đêm
+        <div className="flex justify-between items-center">
+          <h3 className="font-medium text-sm">{property.name}</h3>
+          <div className="flex items-center gap-1 text-sm">
+            <span>★</span>
+            <span>{property.rating.toFixed(property.rating % 1 ? 2 : 1)}</span>
+          </div>
         </div>
-        <div className="flex items-center gap-1 text-sm">
-          <span>★</span>
-          <span>{property.rating.toFixed(property.rating % 1 ? 2 : 1)}</span>
+        <div className="text-[16px] text-gray-500">
+          <p>Chủ nhà: Quốc bảo</p>
+          <p>Pinehill Tu Hieu Hue Homestay </p>
+        </div>
+        <div className="text-[16px] text-gray-800 mt-1.5">
+          {property.price} cho {property.nights} đêm
         </div>
       </CardContent>
     </Card>
