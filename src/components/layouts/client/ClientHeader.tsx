@@ -8,7 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "../../ui/dropdown-menu";
 import { useMobile } from "@/hooks/useMobile";
-import ClientSearch from "./ClientSearch";
+import ClientSearch from "../../common/ClientSearch";
 import { Globe, Menu, User } from "lucide-react";
 
 export default function ClientHeader() {
