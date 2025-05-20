@@ -1,3 +1,4 @@
+import * as React from "react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -5,24 +6,19 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import {
-  ChevronRight,
-  MapPin,
-  MinusCircle,
-  PlusCircle,
-  Search,
-} from "lucide-react";
-import { format, addDays } from "date-fns";
+import { MapPin, MinusCircle, PlusCircle, Search } from "lucide-react";
+import { format } from "date-fns";
 import { vi } from "date-fns/locale";
 import { Calendar } from "@/components/ui/calendar";
+import { DateRange } from "react-day-picker";
 
 export default function ClientSearch() {
-  const [activeSection, setActiveSection] = useState<
-    "location" | "date" | "guests" | null
-  >(null);
-  const [location, setLocation] = useState("");
-  const [date, setDate] = useState<Date | undefined>(undefined);
-  const [month, setMonth] = useState<Date>(new Date(2025, 4, 1)); // May 2025
+  const [activeSection, setActiveSection] = React.useState<string | null>(null);
+  const [location, setLocation] = React.useState("");
+  const [date, setDate] = React.useState<DateRange | undefined>({
+    from: undefined,
+    to: undefined,
+  });
 
   const [adults, setAdults] = useState(0);
   const [children, setChildren] = useState(0);
@@ -88,25 +84,6 @@ export default function ClientSearch() {
     },
   ];
 
-  // Get today's date and format it
-  const today = new Date();
-  const todayFormatted = format(today, "d 'thg' M", { locale: vi });
-
-  // Get tomorrow's date and format it
-  const tomorrow = addDays(today, 1);
-  const tomorrowFormatted = format(tomorrow, "d 'thg' M", { locale: vi });
-
-  // Get weekend dates (Friday to Sunday)
-  const dayOfWeek = today.getDay();
-  const daysToFriday = dayOfWeek === 5 ? 0 : dayOfWeek === 6 ? 6 : 5 - dayOfWeek;
-  const friday = addDays(today, daysToFriday);
-  const sunday = addDays(friday, 2);
-  const weekendFormatted = `${format(friday, "d", { locale: vi })}–${format(
-    sunday,
-    "d 'thg' M",
-    { locale: vi }
-  )}`;
-
   return (
     <div className="relative">
       {/* Main search bar container with proper rounded border */}
@@ -130,7 +107,7 @@ export default function ClientSearch() {
             </div>
           </PopoverTrigger>
           <PopoverContent
-            className="w-[400px] p-0 border-none mt-3 rounded-2xl shadow-2xl"
+            className="w-[400px] p-0 bg-white border-none mt-3 rounded-4xl shadow-2xl"
             align="start"
           >
             <div className="p-4">
@@ -205,124 +182,85 @@ export default function ClientSearch() {
         >
           <PopoverTrigger asChild>
             <div
-              className="flex h-full w-[200px] flex-1 cursor-pointer items-center px-6 py-2 rounded-full hover:bg-gray-200 transition-all"
+              className="flex h-full w-[400px] flex-1 cursor-pointer items-center px-6 py-2 rounded-full hover:bg-gray-200 transition-all"
               onClick={() => setActiveSection("date")}
             >
-              <div className="flex flex-col">
-                <span className="text-sm font-medium">Ngày</span>
-                <span className="text-sm text-gray-500">
-                  {date
-                    ? format(date, "dd MMM yyyy", { locale: vi })
-                    : "Thêm ngày"}
-                </span>
+              <div className="flex flex-col w-full">
+                <div className="flex justify-between">
+                  <span className="text-sm font-medium">Nhận phòng</span>
+                  <span className="text-sm font-medium">Trả phòng</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-sm text-gray-500">
+                    {date?.from
+                      ? format(date.from, "dd MMM yyyy", { locale: vi })
+                      : "Thêm ngày"}
+                  </span>
+                  <span className="text-sm text-gray-500">
+                    {date?.to
+                      ? format(date.to, "dd MMM yyyy", { locale: vi })
+                      : "Thêm ngày"}
+                  </span>
+                </div>
               </div>
             </div>
           </PopoverTrigger>
           <PopoverContent
-            className="w-[550px] ml-[110px] p-1 mt-5 pt-5 border-none shadow-2xl rounded-2xl"
+            className="w-auto p-7 mt-5 bg-white border-none shadow-2xl rounded-4xl"
             align="center"
           >
-            <div className="flex">
-              {/* Quick selection options */}
-              <div className="w-[250px] p-4 space-y-4">
-                <div
-                  className="cursor-pointer rounded-xl p-4 border border-gray-300 hover:border-gray-500 transition-all"
-                  onClick={() => {
-                    setDate(today);
-                    setActiveSection(null);
-                  }}
-                >
-                  <div className="font-medium text-base">Hôm nay</div>
-                  <div className="text-gray-500">{todayFormatted}</div>
-                </div>
-
-                <div
-                  className="cursor-pointer rounded-xl border border-gray-300 p-4 hover:border-gray-500 transition-all"
-                  onClick={() => {
-                    setDate(tomorrow);
-                    setActiveSection(null);
-                  }}
-                >
-                  <div className="font-medium text-base">Ngày mai</div>
-                  <div className="text-gray-500">{tomorrowFormatted}</div>
-                </div>
-
-                <div
-                  className="cursor-pointer rounded-xl p-4 border border-gray-300 hover:border-gray-500 transition-all"
-                  onClick={() => {
-                    setDate(friday);
-                    setActiveSection(null);
-                  }}
-                >
-                  <div className="font-medium text-base">Cuối tuần này</div>
-                  <div className="text-gray-500">{weekendFormatted}</div>
-                </div>
-              </div>
-
-              {/* Calendar */}
-              <div className="flex-1 p-2">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="text-lg font-medium">
-                    {format(month, "MMMM yyyy", { locale: vi })}
-                  </div>
-                  <div className="flex items-center">
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="rounded-full"
-                      onClick={() => {
-                        const prevMonth = new Date(month);
-                        prevMonth.setMonth(prevMonth.getMonth() - 1);
-                        setMonth(prevMonth);
-                      }}
-                    >
-                      <ChevronRight className="h-5 w-5 rotate-180" />
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="rounded-full"
-                      onClick={() => {
-                        const nextMonth = new Date(month);
-                        nextMonth.setMonth(nextMonth.getMonth() + 1);
-                        setMonth(nextMonth);
-                      }}
-                    >
-                      <ChevronRight className="h-5 w-5" />
-                    </Button>
-                  </div>
-                </div>
-
-                <Calendar
-                  mode="single"
-                  selected={date}
-                  onSelect={setDate}
-                  month={month}
-                  onMonthChange={setMonth}
-                  weekStartsOn={1}
-                  disabled={(date: Date) => date < new Date()}
-                  locale={vi}
-                  className="p-0"
-                  showOutsideDays={false}
-                  fixedWeeks
-                  classNames={{
-                    month: "flex flex-col",
-                    caption: "hidden",
-                    table: "w-full border-collapse",
-                    head_row: "flex w-full",
-                    head_cell: "text-muted-foreground w-9 font-normal text-[0.8rem] py-1",
-                    row: "flex w-full mt-1",
-                    cell: "h-9 w-9 text-center text-sm relative p-0 focus-within:relative focus-within:z-20",
-                    day: "h-9 w-9 p-0 font-normal aria-selected:opacity-100",
-                    day_selected: "bg-primary text-primary-foreground hover:bg-primary",
-                    day_today: "bg-accent text-accent-foreground",
-                    day_outside: "text-muted-foreground opacity-50",
-                    day_disabled: "text-muted-foreground opacity-30",
-                    day_hidden: "invisible",
-                  }}
-                />
-              </div>
-            </div>
+            <Calendar
+              initialFocus
+              mode="range"
+              defaultMonth={date?.from}
+              selected={date}
+              onSelect={setDate}
+              numberOfMonths={2}
+              locale={vi}
+              disabled={(date) => date < new Date()}
+              className="p-0"
+              showOutsideDays={false}
+              fixedWeeks
+              classNames={{
+                months:
+                  "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
+                month: "space-y-4",
+                caption: "flex justify-center pt-1 relative items-center",
+                caption_label: "text-sm font-medium",
+                nav: "space-x-1 flex items-center",
+                nav_button:
+                  "h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100",
+                nav_button_previous: "absolute left-1",
+                nav_button_next: "absolute right-1",
+                table: "w-full border-collapse",
+                head_row: "flex justify-between",
+                head_cell:
+                  "text-gray-500 rounded-md w-10 font-normal text-[0.8rem] text-center",
+                row: "flex w-full mt-1 justify-between",
+                cell:
+                  "h-10 w-10 mx-0.5 my-0.5 text-center text-sm p-0 relative rounded-md focus-within:relative focus-within:z-20 " +
+                  "[&:has([aria-selected].day-range-end)]:rounded-r-md " +
+                  "[&:has([aria-selected].day-outside)]:bg-gray-100/50 " +
+                  "[&:has([aria-selected])]:bg-gray-200 " +
+                  "first:[&:has([aria-selected])]:rounded-l-md " +
+                  "last:[&:has([aria-selected])]:rounded-r-md",
+                day:
+                  "h-10 w-10 p-0 font-normal rounded-md transition-colors " +
+                  "aria-selected:opacity-100 " +
+                  "hover:bg-gray-200 hover:text-gray-900 " +
+                  "focus:bg-gray-300 focus:text-black",
+                day_range_end: "day-range-end",
+                day_selected:
+                  "bg-gray-700 text-gray-100 hover:bg-gray-800 hover:text-gray-100 focus:bg-gray-700 focus:text-gray-100",
+                day_today: "bg-gray-200 text-gray-900",
+                day_outside:
+                  "text-gray-400 opacity-50 aria-selected:bg-gray-100/50 aria-selected:text-gray-400 aria-selected:opacity-30",
+                day_disabled: "text-gray-400 opacity-50",
+                day_range_middle:
+                  "aria-selected:bg-gray-200 aria-selected:text-gray-900",
+                day_hidden: "invisible",
+              }}
+            />
           </PopoverContent>
         </Popover>
 
@@ -360,7 +298,7 @@ export default function ClientSearch() {
             </div>
           </PopoverTrigger>
           <PopoverContent
-            className="w-100 border-none mt-3 shadow-2xl rounded-2xl"
+            className="w-100 border-none mt-3 bg-white shadow-2xl rounded-4xl"
             align="end"
           >
             <div className="space-y-4 p-1">
