@@ -39,6 +39,7 @@ export default function ClientHeader() {
         {/* User Menu */}
         <div className="flex items-center gap-2">
           {!isMobile && (
+            
             <Button
               variant="ghost"
               className="hidden rounded-full text-sm font-medium md:flex"
@@ -46,7 +47,7 @@ export default function ClientHeader() {
               Trở thành host
             </Button>
           )}
-
+  
           <Button
             variant="ghost"
             size="icon"
@@ -55,7 +56,6 @@ export default function ClientHeader() {
             <Globe className="h-5 w-5" />
             <span className="sr-only">Language</span>
           </Button>
-
           <DropdownMenu>
             <DropdownMenuTrigger>
               <Button
@@ -66,12 +66,13 @@ export default function ClientHeader() {
                 <User className="h-5 w-5" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent
+             <DropdownMenuContent
               align="end"
-              className="w-56 p-3 mt-1 border-none shadow-2xl rounded-2xl bg-white"
+              sideOffset={8}
+              className="z-50 mt-2 w-56 rounded-2xl border border-gray-100 bg-white p-3 shadow-2xl"
             >
-              <DropdownMenuItem>
-                <Link to="/login" className="w-full">
+              <DropdownMenuItem className="font-medium">
+                <Link to="/register" className="w-full">
                   Sign up
                 </Link>
               </DropdownMenuItem>
