@@ -1,12 +1,12 @@
 "use client";
 
 import * as React from "react";
-import { ChevronLeft, ChevronRight, Heart } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
 import { NavLink } from "react-router-dom";
+import ButtonFavorite from "@/components/common/ButtonFavorite";
 
 export default function Home() {
   const scrollContainerRef1 = React.useRef<HTMLDivElement>(null);
@@ -36,14 +36,14 @@ export default function Home() {
           <div className="flex gap-2">
             <Button
               size="icon"
-              className="rounded-full bg-gray-100"
+              className="rounded-full bg-gray-100 cursor-pointer"
               onClick={() => scroll(scrollContainerRef1, "left")}
             >
               <ChevronLeft className="h-4 w-4" />
             </Button>
             <Button
               size="icon"
-              className="rounded-full bg-gray-100"
+              className="rounded-full bg-gray-100 cursor-pointer"
               onClick={() => scroll(scrollContainerRef1, "right")}
             >
               <ChevronRight className="h-4 w-4" />
@@ -69,14 +69,14 @@ export default function Home() {
           <div className="flex gap-2">
             <Button
               size="icon"
-              className="rounded-full bg-gray-100"
+              className="rounded-full bg-gray-100 cursor-pointer"
               onClick={() => scroll(scrollContainerRef2, "left")}
             >
               <ChevronLeft className="h-4 w-4" />
             </Button>
             <Button
               size="icon"
-              className="rounded-full bg-gray-100"
+              className="rounded-full bg-gray-100 cursor-pointer"
               onClick={() => scroll(scrollContainerRef2, "right")}
             >
               <ChevronRight className="h-4 w-4" />
@@ -109,8 +109,6 @@ interface Property {
 }
 
 function PropertyCard({ property }: { property: Property }) {
-  const [isFavorite, setIsFavorite] = React.useState(property.isFavorite);
-
   return (
     <Card className="min-w-[280px] max-w-[280px] overflow-hidden border-none shadow-none">
       <div className="relative">
@@ -119,24 +117,14 @@ function PropertyCard({ property }: { property: Property }) {
           alt={property.name}
           className="h-[250px] w-full object-cover rounded-2xl cursor-pointer"
         />
-        <Button
-          variant="ghost"
-          size="icon"
-          className={cn(
-            "absolute top-2 right-2 h-8 w-8 rounded-full text-white",
-            isFavorite && "text-rose-500"
-          )}
-          onClick={() => setIsFavorite(!isFavorite)}
-        >
-          <Heart className={cn("h-5 w-5", isFavorite && "fill-current")} />
-        </Button>
-        <Badge className="absolute top-2 left-2 bg-white text-black font-normal">
+        <ButtonFavorite />
+        <Badge className="absolute top-3 left-3 bg-gray-100 text-black font-normal">
           Được khách yêu thích
         </Badge>
       </div>
       <CardContent className="p-2">
-        <div className="flex justify-between items-center">
-          <h3 className="font-medium text-sm">{property.name}</h3>
+        <div className="flex justify-between items-center gap-2">
+          <h3 className="font-medium text-sm truncate">{property.name}</h3>
           <div className="flex items-center gap-1 text-sm">
             <span>★</span>
             <span>{property.rating.toFixed(property.rating % 1 ? 2 : 1)}</span>
@@ -144,7 +132,7 @@ function PropertyCard({ property }: { property: Property }) {
         </div>
         <div className="text-[16px] text-gray-500">
           <p>Chủ nhà: Quốc bảo</p>
-          <p>Pinehill Tu Hieu Hue Homestay </p>
+          <p className="truncate">Pinehill Tu Hieu Hue Homestay </p>
         </div>
         <div className="text-[16px] text-gray-800 mt-1.5">
           {property.price} cho {property.nights} đêm

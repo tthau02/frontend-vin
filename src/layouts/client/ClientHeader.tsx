@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
-import { Button } from "../../ui/button";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "../../ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 import { useMobile } from "@/hooks/useMobile";
-import ClientSearch from "./ClientSearch";
+import ClientSearch from "@/components/common/ClientSearch";
 import { Globe, Menu, User } from "lucide-react";
 
 export default function ClientHeader() {
