@@ -16,7 +16,7 @@ export default function ClientHeader() {
 
   return (
     <header className="sticky top-0 z-50 w-full bg-gray-100">
-      <div className="w-[1500px] m-auto flex h-26 items-center justify-between px-3 md:px-6">
+      <div className="max-w-[1700px] m-auto flex h-26 items-center justify-between px-3 md:px-6">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
           <div className="text-rose-500">

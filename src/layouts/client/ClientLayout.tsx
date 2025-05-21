@@ -6,7 +6,7 @@ const ClientLayout = () => {
   return (
     <>
       <ClientHeader />
-      <div className="min-h-[80vh] w-[1500px] m-auto">
+      <div className="w-[1500px] m-auto">
         <Outlet />
       </div>
       <ClientFooter />

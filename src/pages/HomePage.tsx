@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { NavLink } from "react-router-dom";
 import ButtonFavorite from "@/components/common/ButtonFavorite";
 
-export default function Home() {
+export default function HomePage() {
   const scrollContainerRef1 = React.useRef<HTMLDivElement>(null);
   const scrollContainerRef2 = React.useRef<HTMLDivElement>(null);
 
