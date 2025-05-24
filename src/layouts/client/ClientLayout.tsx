@@ -1,12 +1,13 @@
 import { Outlet } from "react-router-dom";
 import ClientFooter from "./ClientFooter";
 import ClientHeader from "./ClientHeader";
-
+import ClientSearch from "@/components/common/ClientSearch";
 const ClientLayout = () => {
   return (
     <>
       <ClientHeader />
-      <div className="min-h-[80vh] w-[1500px] m-auto">
+      <ClientSearch />
+      <div className="w-[1500px] m-auto">
         <Outlet />
       </div>
       <ClientFooter />

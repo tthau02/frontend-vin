@@ -65,7 +65,7 @@ export default function ClientHeader() {
                 <User className="h-5 w-5" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent
+             <DropdownMenuContent
               align="end"
               sideOffset={8}
               className="z-50 mt-2 w-56 rounded-2xl border border-gray-100 bg-white p-3 shadow-2xl"

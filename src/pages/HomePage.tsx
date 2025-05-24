@@ -6,9 +6,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { NavLink } from "react-router-dom";
-import ButtonFavorite from "@/components/common/ButtonFavorite";
+import ButtonWishlist from "@/components/common/ButtonWishlist";
 
-export default function Home() {
+export default function HomePage() {
   const scrollContainerRef1 = React.useRef<HTMLDivElement>(null);
   const scrollContainerRef2 = React.useRef<HTMLDivElement>(null);
 
@@ -117,7 +117,7 @@ function PropertyCard({ property }: { property: Property }) {
           alt={property.name}
           className="h-[250px] w-full object-cover rounded-2xl cursor-pointer"
         />
-        <ButtonFavorite />
+        <ButtonWishlist />
         <Badge className="absolute top-3 left-3 bg-gray-100 text-black font-normal">
           Được khách yêu thích
         </Badge>

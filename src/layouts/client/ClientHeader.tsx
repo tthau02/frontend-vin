@@ -8,15 +8,15 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useMobile } from "@/hooks/useMobile";
-import ClientSearch from "@/components/common/ClientSearch";
-import { Globe, Menu, User } from "lucide-react";
+// import ClientSearch from "@/components/common/ClientSearch";
+import { Menu, User, Search } from "lucide-react";
 
 export default function ClientHeader() {
   const isMobile = useMobile();
 
   return (
     <header className="sticky top-0 z-50 w-full bg-gray-100">
-      <div className="w-[1500px] m-auto flex h-26 items-center justify-between px-3 md:px-6">
+      <div className="max-w-[1550px] m-auto flex h-18 items-center justify-between px-3 md:px-6">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
           <div className="text-rose-500">
@@ -35,9 +35,64 @@ export default function ClientHeader() {
           </span>
         </Link>
 
-        <ClientSearch />
+        <div className="bg-white rounded-full shadow-2xl border border-gray-300 flex items-center h-12 p-1">
+          <div className="flex items-center gap-2 px-4 py-2 rounded-full cursor-pointer">
+            <div className="flex-shrink-0">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+              >
+                <path
+                  d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M9 22V12H15V22"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </div>
+            <span className="text-sm font-medium hover:text-gray-600">
+              Địa điểm bất kỳ
+            </span>
+          </div>
+
+          <div className="h-2/3 w-px bg-gray-300"></div>
+
+          <div className="px-4 py-2 cursor-pointer">
+            <span className="text-sm font-medium hover:text-gray-600">
+              Thời gian bất kỳ
+            </span>
+          </div>
+
+          <div className="h-2/3 w-px bg-gray-300"></div>
+
+          <div className="px-4 py-2  cursor-pointer">
+            <span className="text-sm font-medium hover:text-gray-600">
+              Thêm khách
+            </span>
+          </div>
+
+          <Button
+            size="icon"
+            className="ml-auto text-white rounded-full bg-rose-500 hover:bg-rose-600 h-8 w-8"
+          >
+            <Search className="h-5 w-5" />
+            <span className="sr-only">Tìm kiếm</span>
+          </Button>
+        </div>
         {/* User Menu */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center">
           {!isMobile && (
             <Button
               variant="ghost"
@@ -46,16 +101,6 @@ export default function ClientHeader() {
               Trở thành host
             </Button>
           )}
-
-          <Button
-            variant="ghost"
-            size="icon"
-            className="hidden rounded-full md:flex"
-          >
-            <Globe className="h-5 w-5" />
-            <span className="sr-only">Language</span>
-          </Button>
-
           <DropdownMenu>
             <DropdownMenuTrigger>
               <Button
