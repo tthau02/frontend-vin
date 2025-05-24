@@ -85,9 +85,9 @@ export default function ClientSearch() {
   ];
 
   return (
-    <div className="relative">
+    <div className="relative p-3 bg-gray-100 flex justify-center items-center ">
       {/* Main search bar container with proper rounded border */}
-      <div className="flex h-16 w-full max-w-[850px] items-center rounded-full border border-gray-300 bg-white shadow-sm hover:shadow-md md:w-auto overflow-hidden">
+      <div className="flex h-16 w-full max-w-[900px] items-center rounded-full border border-gray-300 bg-white shadow-sm hover:shadow-md md:w-auto overflow-hidden">
         {/* Location Section */}
         <Popover
           open={activeSection === "location"}
@@ -100,7 +100,7 @@ export default function ClientSearch() {
             >
               <div className="flex flex-col">
                 <span className="text-sm font-medium">Địa điểm</span>
-                <span className="text-sm text-gray-500">
+                <span className="text-[13px] text-gray-500 truncate">
                   {location || "Tìm kiếm điểm đến"}
                 </span>
               </div>
@@ -191,12 +191,12 @@ export default function ClientSearch() {
                   <span className="text-sm font-medium">Trả phòng</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-sm text-gray-500">
+                  <span className="text-[13px] text-gray-500">
                     {date?.from
                       ? format(date.from, "dd MMM yyyy", { locale: vi })
                       : "Thêm ngày"}
                   </span>
-                  <span className="text-sm text-gray-500">
+                  <span className="text-[13px] text-gray-500">
                     {date?.to
                       ? format(date.to, "dd MMM yyyy", { locale: vi })
                       : "Thêm ngày"}
@@ -279,7 +279,7 @@ export default function ClientSearch() {
             >
               <div className="flex flex-col w-[100px]">
                 <span className="text-sm font-medium">Khách</span>
-                <span className="text-sm text-gray-500">
+                <span className="text-[13px] text-gray-500">
                   {totalGuests > 0
                     ? `${totalGuests} khách${
                         infants > 0 ? `, ${infants} em bé` : ""

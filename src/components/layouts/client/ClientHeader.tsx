@@ -39,7 +39,6 @@ export default function ClientHeader() {
         {/* User Menu */}
         <div className="flex items-center gap-2">
           {!isMobile && (
-            
             <Button
               variant="ghost"
               className="hidden rounded-full text-sm font-medium md:flex"
@@ -47,7 +46,7 @@ export default function ClientHeader() {
               Trở thành host
             </Button>
           )}
-  
+
           <Button
             variant="ghost"
             size="icon"
