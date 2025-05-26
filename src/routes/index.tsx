@@ -1,11 +1,11 @@
 import { createBrowserRouter, RouteObject } from "react-router-dom";
-import ClientLayout from "@/layouts/client/ClientLayout";
 import HomePage from "@/pages/HomePage";
 import Register from "@/pages/auth/RegisterPage";
 import Login from "@/pages/auth/LoginPage";
 import ForgotPassword from "@/pages/auth/ForgotPasswordPage";
 import ResetPassword from "@/pages/auth/ResetPasswordPage";
 import ErrorPage from "@/pages/errorPage";
+import ClientLayout from "@/components/layouts/client/ClientLayout";
 
 const routes: RouteObject[] = [
   {
