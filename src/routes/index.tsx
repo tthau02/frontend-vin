@@ -7,6 +7,7 @@ import ResetPassword from "@/pages/auth/ResetPasswordPage";
 import ErrorPage from "@/pages/errorPage";
 import ClientLayout from "@/components/layouts/client/ClientLayout";
 import OtpPage from "@/pages/auth/OtpPage";
+import ChatInterface from "@/pages/chatPage";
 
 const routes: RouteObject[] = [
   {
@@ -19,6 +20,7 @@ const routes: RouteObject[] = [
       { path: "verify-otp", element: <OtpPage /> },
       { path: "forgot-password", element: <ForgotPassword /> },
       { path: "reset-password", element: <ResetPassword /> },
+      { path: "chat", element: <ChatInterface /> },
     ],
   },
   {
